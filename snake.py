@@ -1,3 +1,4 @@
+# Controls the snake and how it moves
 from turtle import Turtle, Screen
 
 STARTING_POSITION = [(0, 0), (-20, 0), (-40, 0)]
@@ -6,7 +7,6 @@ UP = 90
 DOWN = 270
 LEFT = 180
 RIGHT = 0
-
 
 class Snake:
     def __init__(self):
@@ -23,11 +23,18 @@ class Snake:
 
     def create_snake(self):
         for position in STARTING_POSITION:
-            segment = Turtle(shape="square")
-            segment.penup()
-            segment.color("white")
-            segment.goto(position)
-            self.snake.append(segment)
+            self.add_segment(position)
+
+    def add_segment(self, position):
+        segment = Turtle(shape="square")
+        segment.penup()
+        segment.color("white")
+        segment.goto(position)
+        self.snake.append(segment)
+
+    def extend(self):
+        self.add_segment(self.snake[-1].position())
+
 
     def up(self):
         if self.head.heading() != DOWN:
